@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1015</width>
+    <height>688</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Гидрометеорологические параметры</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="resource.qrc">
+    <normaloff>:/rec/img/ico.ico</normaloff>:/rec/img/ico.ico</iconset>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="4" column="1">
+     <widget class="QGraphicsView" name="graphicsView_4">
+      <property name="styleSheet">
+       <string notr="true">border-image: url(:/rec/img/seli.png);</string>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="1">
+     <widget class="QLabel" name="label_4">
+      <property name="font">
+       <font>
+        <pointsize>16</pointsize>
+        <weight>75</weight>
+        <italic>true</italic>
+        <bold>true</bold>
+        <underline>true</underline>
+       </font>
+      </property>
+      <property name="text">
+       <string>Сели</string>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="0">
+     <widget class="QGraphicsView" name="graphicsView_3">
+      <property name="styleSheet">
+       <string notr="true">border-image: url(:/rec/img/flood.png);</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="QGraphicsView" name="graphicsView_2">
+      <property name="styleSheet">
+       <string notr="true">border-image: url(:/rec/img/floodShema.png);</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="0">
+     <widget class="QLabel" name="label">
+      <property name="font">
+       <font>
+        <pointsize>16</pointsize>
+        <weight>75</weight>
+        <italic>true</italic>
+        <bold>true</bold>
+        <underline>true</underline>
+       </font>
+      </property>
+      <property name="text">
+       <string>Лавины</string>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="0">
+     <widget class="QLabel" name="label_3">
+      <property name="font">
+       <font>
+        <pointsize>16</pointsize>
+        <weight>75</weight>
+        <italic>true</italic>
+        <bold>true</bold>
+        <underline>true</underline>
+       </font>
+      </property>
+      <property name="text">
+       <string>Наводнения</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="1">
+     <widget class="QLabel" name="label_2">
+      <property name="font">
+       <font>
+        <pointsize>16</pointsize>
+        <weight>75</weight>
+        <italic>true</italic>
+        <bold>true</bold>
+        <underline>true</underline>
+       </font>
+      </property>
+      <property name="text">
+       <string>Паводки</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="0" colspan="2">
+     <spacer name="verticalSpacer">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeType">
+       <enum>QSizePolicy::Maximum</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>22</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="1" column="0">
+     <widget class="QGraphicsView" name="graphicsView">
+      <property name="styleSheet">
+       <string notr="true">border-image: url(:/rec/img/avalanche.png);</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1015</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuGMProgramm">
+    <property name="title">
+     <string>Меню программы</string>
+    </property>
+    <addaction name="btn_get_data"/>
+    <addaction name="btn_change"/>
+    <addaction name="FilterGrphBtn"/>
+    <addaction name="buttonMap"/>
+    <addaction name="btn_exit"/>
+   </widget>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>Выполнить расчеты</string>
+    </property>
+    <addaction name="btn_avalanches"/>
+   </widget>
+   <widget class="QMenu" name="menu_2">
+    <property name="title">
+     <string>Настройки БД</string>
+    </property>
+    <addaction name="btn_setting_db"/>
+    <addaction name="btn_del"/>
+   </widget>
+   <widget class="QMenu" name="aboutProg">
+    <property name="title">
+     <string>О программе</string>
+    </property>
+    <addaction name="developBtn"/>
+    <addaction name="reference"/>
+   </widget>
+   <addaction name="menuGMProgramm"/>
+   <addaction name="menu"/>
+   <addaction name="menu_2"/>
+   <addaction name="aboutProg"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="btn_get_data"/>
+   <addaction name="btn_change"/>
+   <addaction name="FilterGrphBtn"/>
+   <addaction name="buttonMap"/>
+   <addaction name="separator"/>
+   <addaction name="btn_avalanches"/>
+   <addaction name="separator"/>
+   <addaction name="btn_setting_db"/>
+   <addaction name="btn_del"/>
+   <addaction name="separator"/>
+   <addaction name="btn_exit"/>
+  </widget>
+  <action name="btn_get_data">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/rec/img/get_data.png</normaloff>:/rec/img/get_data.png</iconset>
+   </property>
+   <property name="text">
+    <string>Получение данных</string>
+   </property>
+  </action>
+  <action name="btn_del">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/rec/img/del_data.png</normaloff>:/rec/img/del_data.png</iconset>
+   </property>
+   <property name="text">
+    <string>Отключиться от БД</string>
+   </property>
+  </action>
+  <action name="btn_change">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/rec/img/change.png</normaloff>:/rec/img/change.png</iconset>
+   </property>
+   <property name="text">
+    <string>Изменение данных в БД</string>
+   </property>
+  </action>
+  <action name="btn_exit">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/rec/img/exit.png</normaloff>:/rec/img/exit.png</iconset>
+   </property>
+   <property name="text">
+    <string>Выйти из программы</string>
+   </property>
+  </action>
+  <action name="btn_avalanches">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/rec/img/avalanches.png</normaloff>:/rec/img/avalanches.png</iconset>
+   </property>
+   <property name="text">
+    <string>Лавинная опасность</string>
+   </property>
+  </action>
+  <action name="btn_setting_db">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/rec/img/settingDB.png</normaloff>:/rec/img/settingDB.png</iconset>
+   </property>
+   <property name="text">
+    <string>Настройки подключения к БД</string>
+   </property>
+  </action>
+  <action name="reference">
+   <property name="text">
+    <string>Справка</string>
+   </property>
+  </action>
+  <action name="developBtn">
+   <property name="text">
+    <string>Разработчики</string>
+   </property>
+  </action>
+  <action name="FilterGrphBtn">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/rec/img/graphics.png</normaloff>:/rec/img/graphics.png</iconset>
+   </property>
+   <property name="text">
+    <string>Фильтр и графики</string>
+   </property>
+  </action>
+  <action name="buttonMap">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/rec/img/map256.png</normaloff>:/rec/img/map256.png</iconset>
+   </property>
+   <property name="text">
+    <string>Просмотр карты</string>
+   </property>
+  </action>
+ </widget>
+ <resources>
+  <include location="resource.qrc"/>
+ </resources>
+ <connections/>
+</ui>

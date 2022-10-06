@@ -1,0 +1,25 @@
+<RCC>
+    <qresource prefix="/rec">
+        <file>img/change.png</file>
+        <file>img/del_data.png</file>
+        <file>img/exit.png</file>
+        <file>img/get_data.png</file>
+        <file>img/avalanches.png</file>
+        <file>img/settingDB.png</file>
+        <file>img/graphics.png</file>
+        <file>img/workTable.jpg</file>
+        <file>textRead.txt</file>
+        <file>img/database.drawio.png</file>
+        <file>img/fonSetting.jpg</file>
+        <file>img/Logotip.png</file>
+        <file>img/map256.png</file>
+        <file>map.qml</file>
+        <file>img/avalanche.png</file>
+        <file>img/flood.png</file>
+        <file>img/floodShema.png</file>
+        <file>img/seli.png</file>
+        <file>img/ico.ico</file>
+        <file>img/pngwing.png</file>
+    </qresource>
+    <qresource prefix="/"/>
+</RCC>

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>FilterAndGraphics</class>
+ <widget class="QDialog" name="FilterAndGraphics">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1062</width>
+    <height>728</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Фильтр и графики</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="resource.qrc">
+    <normaloff>:/rec/img/ico.ico</normaloff>:/rec/img/ico.ico</iconset>
+  </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0">
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QChartView" name="graphicsView">
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>16777215</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QTableWidget" name="tableWidget"/>
+     </item>
+    </layout>
+   </item>
+   <item row="0" column="1">
+    <widget class="QWidget" name="horizontalWidget" native="true">
+     <property name="styleSheet">
+      <string notr="true">border-image: url(:/rec/img/fonSetting.jpg);</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_2">
+      <item row="10" column="0">
+       <widget class="QPushButton" name="saveToCSVBtn">
+        <property name="font">
+         <font>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Сохранить в .CSV</string>
+        </property>
+       </widget>
+      </item>
+      <item row="9" column="0">
+       <widget class="QPushButton" name="getDataBtn">
+        <property name="font">
+         <font>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(138, 226, 52)</string>
+        </property>
+        <property name="text">
+         <string>Загрузить данные из БД</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QPushButton" name="createGraph">
+        <property name="font">
+         <font>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: rgb(46, 52, 54);</string>
+        </property>
+        <property name="text">
+         <string>Построить график</string>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="0">
+       <widget class="QComboBox" name="nameTables"/>
+      </item>
+      <item row="5" column="0">
+       <widget class="QPushButton" name="savePic">
+        <property name="font">
+         <font>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Сохранить изображение графика</string>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="0">
+       <layout class="QGridLayout" name="settingGridLayout"/>
+      </item>
+      <item row="1" column="0">
+       <layout class="QGridLayout" name="settingGraphGridLayout"/>
+      </item>
+      <item row="11" column="0">
+       <widget class="QPushButton" name="pushButton">
+        <property name="font">
+         <font>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Удалить выделенные элементы</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QChartView</class>
+   <extends>QGraphicsView</extends>
+   <header>qchartview.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="resource.qrc"/>
+ </resources>
+ <connections/>
+</ui>
