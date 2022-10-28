@@ -10,7 +10,7 @@ RequestSql::RequestSql()
 {    
 }
 
-//получение всех данных из таблцы
+//получение всех данных из таблицы
 QSqlQuery RequestSql::getAllTable(QString nameTable, QString strCntRep)
 {
     QSqlQuery query;
@@ -23,19 +23,32 @@ QSqlQuery RequestSql::getAllTable(QString nameTable, QString strCntRep)
     return query;
 }
 
+//получение данных из общей таблицы с названиями и переводом
+QSqlQuery RequestSql::getAllTableNames(QString nameTable)
+{
+    QSqlQuery query;
+    query.prepare("SELECT * FROM "+ nameTable + " ORDER BY " + "id");
+
+    if (!query.exec()){
+        QMessageBox::warning(0, "Ошибка чтения", query.lastError().text());
+        return query;
+    }
+    return query;
+}
+
 //получение выбранных данных из таблцы
 QSqlQuery RequestSql::getDataForSlctColms(QString nameTable, QStringList listNameHeader, QString strCntRep)
 {
     QSqlQuery query;
     QString strSQL = "";
-    strSQL = "SELECT (";
+    strSQL = "SELECT ";
 
     for (int i = 0; i < listNameHeader.length(); i++)
     {
         strSQL += listNameHeader[i];
         if (i+1 != listNameHeader.length()) strSQL += ", ";
     }
-    strSQL += ") FROM " + nameTable + " LIMIT " + strCntRep;
+    strSQL += " FROM " + nameTable + " LIMIT " + strCntRep;
 
     query.prepare(strSQL);
 

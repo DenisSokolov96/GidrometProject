@@ -20,6 +20,8 @@
         <file>img/seli.png</file>
         <file>img/ico.ico</file>
         <file>img/pngwing.png</file>
+        <file>img/imageRed.png</file>
+        <file>img/imageBlue.png</file>
     </qresource>
     <qresource prefix="/"/>
 </RCC>

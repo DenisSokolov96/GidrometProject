@@ -20,7 +20,7 @@ inline bool createConnection()//подключение
     db.setPort(storageConctMap["port"].toInt());
 
     if (!db.open()){
-        QMessageBox::warning(0, "Ошибка БД", db.lastError().text());
+        QMessageBox::warning(0, "Ошибка подключения", db.lastError().text());
         return false;
     }
     else

@@ -10,6 +10,7 @@ public:
     RequestSql();
     QString createTables();
     QSqlQuery getAllTable(QString nameTable, QString strCntRep);
+    QSqlQuery getAllTableNames(QString nameTable);
     QSqlQuery getNamesColumns(QString nameTable);
     QSqlQuery getNamesTables();
     QSqlQuery getDataForSlctColms(QString nameTable, QStringList listNameHeader, QString strCntRep);

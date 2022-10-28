@@ -24,29 +24,21 @@ MapWorld::MapWorld(QWidget *parent) :
     //всплывающие подсказки
     myToolTip();
 
-    // для QWebWidget отображение google карты в программе    
-    //QString gMapURL = "Россия";
-    //gMapURL = "http://maps.google.com.sg/maps?q="+gMapURL+"&oe=utf-8&rls=org.mozilla:en-US:official&client=firefox-a&um=1&ie=UTF-8&hl=en&sa=N&tab=wl";
-    //gMapURL = "https://www.google.com/maps";
-    //ui->Map->setUrl(QUrl(gMapURL));
-
     // для QQuickWidget
-    //ui->Map->setSource(QUrl(QStringLiteral("qrc:/rec/map.qml")));
-    // для QQuickWidget
-        ui->Map->setSource(QUrl(QStringLiteral("qrc:/rec/map.qml")));
+    MarkerModel model;
+    ui->Map->rootContext()->setContextProperty("markerModel", &model);
+    ui->Map->setSource(QUrl(QStringLiteral("qrc:/rec/map.qml")));
+    ui->Map->show();
 
+    auto obj = ui->Map->rootObject();
+    connect(this, SIGNAL(setCoordinate(QVariant,QVariant, QVariant)), obj, SLOT(setCoordinate(QVariant, QVariant, QVariant)));
 
+    for (int i = 0; i<listCoordinates.length(); i++){
+        double lat = listCoordinates[i].latitude();
+        double lon = listCoordinates[i].longitude();
 
-
-        ui->Map->show();
-        auto obj = ui->Map->rootObject();
-        connect(this, SIGNAL(setCenter(QVariant,QVariant)), obj, SLOT(setCenter(QVariant, QVariant)));
-//    QQuickWidget w;
-//    MarkerModel model;
-//    w.rootContext()->setContextProperty("MarkerModel", &model);
-
-//    w.setSource(QUrl(QStringLiteral("qrc:/rec/map.qml")));
-//    w.show();
+        emit setCoordinate(lat,lon,listName[i]);
+    }
 
 }
 
@@ -64,8 +56,8 @@ void MapWorld::getLatAndLot()
     //hydroposts (hydropost_name latitude longitude)
 
     QStringList listNameTable = {"meteostations", "hydroposts"};
-    QList<QStringList> listNameCol = {  {"latitude", "longitude", "meteostation_id"},
-                                 {"latitude", "longitude", "hydropost_id"}  };
+    QList<QStringList> listNameCol = {  {"latitude", "longitude", "meteostation_id", "meteostation_name"},
+                                 {"latitude", "longitude", "hydropost_id", "hydropost_name"}  };
 
 
     for (int i =0; i < listNameTable.length(); i++)
@@ -73,14 +65,30 @@ void MapWorld::getLatAndLot()
         QSqlQuery requestQuery = requestSql.getDataForSlctColms(listNameTable[i], listNameCol[i], "ALL");
         while (requestQuery.next())
         {
-            QString str_lat = requestQuery.value(0).toString();
-            QString str_lon = requestQuery.value(1).toString();            
+            coordinate.setLatitude( requestQuery.value(0).toDouble() );
+            coordinate.setLongitude( requestQuery.value(1).toDouble() );
             int id_coordinat = requestQuery.value(2).toInt();
-            coordinate.setLatitude(str_lat.toDouble());
-            coordinate.setLongitude(str_lon.toDouble());
+            QString name = requestQuery.value(3).toString();
+
             listCoordinates.append(coordinate);
-            listIdCoordinates.append(id_coordinat);
-        }
+            QStringList listStr;
+            switch (i) {
+            case 0:              
+                listStr.append(name);
+                listStr.append(QString::number(id_coordinat));
+                listStr.append("Метеостанция");
+                listName.append(listStr);
+                break;
+            case 1:
+                listStr.append(name);
+                listStr.append(QString::number(id_coordinat));
+                listStr.append("Гидропост");
+                listName.append(listStr);
+                break;
+            default:
+                break;
+            }
+        }        
     }
 }
 
@@ -110,7 +118,7 @@ QStringList MapWorld::requvestInfo()
     QStringList textInfoGeoObject;
     QString lineSearch = ui->lineSearch->text();
     QStringList listNameTable = {"meteostations", "hydroposts"};    
-    QList<QStringList> listNameCol = {  {"mountain_name", "meteostation_name"},
+    QList<QStringList> listNameCol = {  {"  mountain_name", "meteostation_name"},
                                         {"hydropost_organ", "hydropost_name"} };
     if ( lineSearch.toInt()){
         listNameCol[0].append("meteostation_id");

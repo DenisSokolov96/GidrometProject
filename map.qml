@@ -1,181 +1,137 @@
-﻿import QtQuick 2.12
-import QtLocation 5.12
-import QtPositioning 5.12
+import QtQuick 2.0
+import QtLocation 5.6
+import QtPositioning 5.5
 import QtQuick.Dialogs 1.2
-import QtQuick.Controls 1.2
-import QtQuick.Layouts 1.2
 
-Map {
-    property double oldLat: 55.75
-    property double oldLon: 37.36
+
+MapItemView {
+
+    PositionSource{
+        id: position_id
+    }
 
     Plugin {
         id: mapPlugin
         name: "osm"
     }
 
-    Map {
-        id: mapView
+    Map{
+        id: map_id
         anchors.fill: parent
         plugin: mapPlugin
-        center: QtPositioning.coordinate(oldLat, oldLon)
-        zoomLevel: 8
-         // для точек на карте
-        MapItemView {
-               model: searchModel
-               delegate: MapQuickItem {
-                   coordinate: place.location.coordinate
+        center: position_id.position.coordinate
+        zoomLevel: 7        
+        MapItemView{
+                    model: markerModel
+                    delegate: mapComponent
+        }
+        // Легенда карты
+        Rectangle{
+            anchors{
+                left: map_id.left
+                top: map_id.top
+                margins: 2
+            }
+            width: 380
+            height: content.height + 50
+            color: "transparent"
+            border.color: "green"
+            border.width: 2
+            Rectangle{
+                width: 380; height: content.height + 50
+                opacity: 0.6
+            }
 
-                   anchorPoint.x: image.width * 0.5
-                   anchorPoint.y: image.height
-
-                   sourceItem: Column {
-                       Image { id: image; source: "http://maps.gstatic.com/mapfiles/ridefinder-images/mm_20_red.png" }
-                       Text { text: title; font.bold: true }
-                   }
+            Text {
+                id: content
+                x: 4
+                y: 2
+                color: "green"
+                font.pixelSize: 14
+                text: qsTr("Уровень масштаба: " + Math.floor(map_id.zoomLevel)+" / Координаты центра: "+
+                      Math.ceil(map_id.center.latitude*100)/100+"  "+Math.ceil(map_id.center.longitude*100)/100)
+            }
+            Image {
+                id: imageRed
+                source: "img/imageRed.png"
+                x: 4
+                y: 22
+            }
+            Text {
+                id: imageRedText
+                x: 24
+                y: 22
+                color: "green"
+                text: qsTr("- метеостанции")
+            }
+            Image {
+                id: imageBlue
+                x: 4
+                y: 44
+                source: "img/imageBlue.png"
+            }
+            Text {
+                id: imageBlueText
+                x: 24
+                y: 44
+                color: "green"
+                text: qsTr("- гидропосты")
+            }
+        }
+    }
+    Component {
+           id: mapComponent
+           MapQuickItem {
+               id: marker_id
+               property var listInfo: textInfo
+               sourceItem: Column {
+                               Image{ id: image; source: setImage(textInfo)}
+                               Text { text: textInfo[0]; font.bold: true }
                }
-           }
+               coordinate: position
+               anchorPoint.x: imageRed.width * 0.5
+               anchorPoint.y: imageRed.height
+               //Кликнуть по координате
+               MouseArea{
+                  id:mouse_id
+                  anchors.fill: parent
+                  onClicked: {
+                      messageDialog.text = getTextInfo(listInfo)
+                      messageDialog.visible = true
+                  }
+
+               }
+            }
+    }
+    //idCoordinate - пока не использую
+    function setCoordinate(lat, lon, listNameIdStation) {
+
+        markerModel.addMarker( QtPositioning.coordinate(lat, lon), listNameIdStation )
     }
 
-    function setCenter(lat, lon){
-        mapView.pan(oldLat - lat, oldLon - lon)
-        oldLat = lat
-        oldLon = lon
+    //синия для гидропостов, красная для метеостанций
+    function setImage(textInfo){
+
+        if ( textInfo[2] === "Метеостанция" ) return "img/imageRed.png"
+        else return "img/imageBlue.png"
     }
 
-   // для точек на карте
-    property variant locationOslo: QtPositioning.coordinate( 55.75, 37.36)
-    PlaceSearchModel {
-        id: searchModel
-        plugin: mapPlugin
-        searchTerm: "Метеостанция"
-        searchArea: QtPositioning.circle(locationOslo)
-        Component.onCompleted: update()
+    //вывод текстовой информации
+    function getTextInfo(listInfo){
+        var str = qsTr("Выбрана точка на карте:\n");
+        str += qsTr("Объект: " + listInfo[2] + "\n");         //метеостанция/гидропост
+        str += qsTr("Название: " + listInfo[0] + "\n");       //название
+        str += qsTr("Идентификатор: " + listInfo[1]);  //id
+
+        return str;
+    }
+
+    MessageDialog {
+        id: messageDialog
+        title: "Информация"
+        onAccepted: {
+            Qt.quit()
+        }
+        Component.onCompleted: visible = false
     }
 }
-
-//    Component {
-//            id: mapcomponent
-//            MapQuickItem {
-//                id: marker
-//                anchorPoint.x: image.width/4
-//                anchorPoint.y: image.height
-//                coordinate: position
-
-//                sourceItem: Image {
-//                    id: image
-//                    source: "http://maps.gstatic.com/mapfiles/ridefinder-images/mm_20_red.png"
-//                }
-//            }
-//        }
-//}
-
-//Rectangle {
-//    width: 1000//Screen.width
-//    height: 950//Screen.height
-//    property double oldLat: 55.75
-//    property double oldLon: 37.36
-//    visible: true
-
-
-//    Plugin {
-//        id: mapPlugin
-//        name: ["osm", "esri"]
-//    }
-
-//    Map {
-//        id: mapView
-//        anchors.fill: parent
-//        plugin: mapPlugin
-//        center: QtPositioning.coordinate(oldLat, oldLon)
-//        zoomLevel: 8
-//        // для точек на карте
-//        MapItemView {
-//               model: MarkerModel
-//               delegate: mapcomponent
-//        }
-//    }
-
-//    Component {
-//        id: mapcomponent
-//        MapQuickItem {
-//            id: marker
-//            anchorPoint.x: image.width/2
-//            anchorPoint.y: image.height/2
-//            coordinate: place.location.coordinate
-
-//            sourceItem:
-//                Image {
-//                    id: imageMeteostation
-//                    source: "http://maps.gstatic.com/mapfiles/ridefinder-images/mm_20_red.png"
-//                }
-//                Image {
-//                    id: imageGidropost
-//                    source: "http://maps.gstatic.com/mapfiles/ridefinder-images/mm_20_blue.png"
-//                }
-//        }
-//    }
-
-//    MouseArea {
-//        //anchors.fill: parent
-//        onPressAndHold:  {
-//            var coordinate = mapview.toCoordinate(Qt.point(mouse.x,mouse.y))
-//            MarkerModel.addMarker(coordinate)
-//        }
-//    }
-
-
-//}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//Для дальнейшего развития
-//    MessageDialog {
-//        id: messageDialog
-//        title: "Сообщение"
-//        text: "Загрузка карты..."
-//        onAccepted: {
-//            Qt.quit()
-//        }
-//        Component.onCompleted: visible = true
-//    }
-   // для поиска точек на карте
-//    property variant locationOslo: QtPositioning.coordinate( 55.75, 37.36)
-//    PlaceSearchModel {
-//        id: searchModel
-//        plugin: mapPlugin
-//        searchTerm: "Метеостанция"
-//        searchArea: QtPositioning.circle(locationOslo)
-//        Component.onCompleted: update()
-//    }
-
-//MapQuickItem {
-//coordinate: place.location.coordinate
-
-//anchorPoint.x: image_red.width / 2
-//anchorPoint.y: image_red.height / 2
-
-//sourceItem:
-//Column {
-//    id: meteostation;
-//    Image { id: image_red; source: "http://maps.gstatic.com/mapfiles/ridefinder-images/mm_20_red.png" }
-//    Text { text: title; font.bold: true }
-//}
-//                   Column {
-//                         id: gidropost;
-//                         Image { id: image_blue; source: "http://maps.gstatic.com/mapfiles/ridefinder-images/mm_20_blue.png" }
-//                         Text { text: title; font.bold: true }
-//                   }
-
-

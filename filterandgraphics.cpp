@@ -122,7 +122,7 @@ void FilterAndGraphics::on_saveToCSVBtn_clicked()
 void FilterAndGraphics::on_getDataBtn_clicked()
 {
     ui->tableWidget->setRowCount(0);
-    RequestSql requestSql;    
+    RequestSql requestSql;
     nameTableOut = storageFilter.valToKey(ui->nameTables->currentText());
     listHeaderOutRUS = getInfoOutCheckBoxs();
     listHeaderOutUS = storageFilter.changeLanguage(nameTableOut, listHeaderOutRUS);
@@ -141,7 +141,7 @@ void FilterAndGraphics::on_getDataBtn_clicked()
 
 //Подготовка таблицы и вывод данных
 void FilterAndGraphics::setInfo(QSqlQuery requestQuery)
-{   
+{
     int columns = listHeaderOutUS.length();
     ui->tableWidget->setColumnCount(columns); //число колонок
     ui->tableWidget->setHorizontalHeaderLabels(listHeaderOutRUS); // прописываю заголовки
@@ -153,17 +153,11 @@ void FilterAndGraphics::setInfo(QSqlQuery requestQuery)
     // Растягиваем последнюю колонку на всё доступное пространство
     ui->tableWidget->horizontalHeader()->setStretchLastSection(true);
 
-    for(int i = 0; requestQuery.next(); i++){
+    for(int i = 0; requestQuery.next(); i++)
+    {
         ui->tableWidget->insertRow(i);
-        QString str = requestQuery.value(0).toString();
-        //удалить первый и последний символ
-        str.remove(0,1);
-        str.remove(str.length()-1, str.length()-1);
-        QStringList listResult = str.split(",");
-        for (int j = 0; j < listResult.length(); j++)
-        {
-            ui->tableWidget->setItem(i,j, new QTableWidgetItem(listResult[j]));
-        }
+        for (int j = 0; requestQuery.value(j).isValid(); j++)
+            ui->tableWidget->setItem(i,j, new QTableWidgetItem(requestQuery.value(j).toString()));
     }
 
     // Ресайз колонок по содержимому

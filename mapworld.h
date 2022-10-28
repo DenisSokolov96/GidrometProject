@@ -15,8 +15,9 @@ class MapWorld : public QDialog
 
 public:
     explicit MapWorld(QWidget *parent = nullptr);
-    QList<QGeoCoordinate> listCoordinates;
-    QList<int> listIdCoordinates;
+    QList<QGeoCoordinate> listCoordinates; 
+    // name, idCoordinates, MeteoStation/GidroPost
+    QList<QStringList> listName;
     ~MapWorld();
 
 private:
@@ -26,6 +27,7 @@ private:
     QStringList requvestInfo();
 
 signals:   
+    void setCoordinate(QVariant,QVariant, QVariant);
 
 private slots:
     void on_searchBtn_clicked();

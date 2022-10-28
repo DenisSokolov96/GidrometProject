@@ -17,7 +17,7 @@ void Storage::getNameTableAndCol()
 {
 
     RequestSql requestSql;
-    QSqlQuery query = requestSql.getAllTable("nameheaders","ALL");
+    QSqlQuery query = requestSql.getAllTableNames("nameheaders");
     while(query.next())
     {
         QString name_us = query.value(1).toString();

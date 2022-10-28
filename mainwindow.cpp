@@ -18,12 +18,12 @@ MainWindow::MainWindow(QWidget *parent)
 
     //Коментарии только для тестирования
     //Запуск окна подключения
-    SettingDBWindow settingDBWindow;
-    settingDBWindow.exec();
+    //SettingDBWindow settingDBWindow;
+    //settingDBWindow.exec();
 
     //createConnection Только для разработки, сразу устанавливаем соединение
-    //if (createConnection())
-    //    storageMain.getNameTableAndCol();
+    if (createConnection())
+        storageMain.getNameTableAndCol();
     // END !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
     //Функция для вывода подсказок
