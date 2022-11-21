@@ -1,0 +1,4 @@
+CREATE TABLE IF NOT EXISTS meteostations (mountain_name TEXT, meteostation_name TEXT, meteostation_id INTEGER, latitude REAL, longitude REAL, altitude INTEGER) 
+CREATE TABLE IF NOT EXISTS meteostation_data (meteostation_id INTEGER, data_datetime TEXT, air_temperature REAL, atmosphere_station_pressure REAL, atmosphere_sea_pressure REAL, relative_humidity REAL, wind_direction TEXT, wind_velocity INTEGER, min_air_temperature REAL, max_air_temperature REAL, precipitation INTEGER, snow_height REAL) 
+CREATE TABLE IF NOT EXISTS hydroposts (hydropost_id INTEGER, hydropost_name TEXT,hydropost_organ TEXT, hydropost_river TEXT, latitude REAL, longitude REAL) 
+CREATE TABLE IF NOT EXISTS hydropost_data (hydropost_id INTEGER, data_datetime TEXT, water_temperature REAL, water_direction TEXT, water_velocity INTEGER, water_level REAL)

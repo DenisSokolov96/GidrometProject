@@ -15,6 +15,8 @@ ChangeDataWindow::ChangeDataWindow(QWidget *parent) :
     ui(new Ui::ChangeDataWindow)
 {
     ui->setupUi(this);
+
+    setValueInSelectBox();
     ui->selectTableBox->addItems(storageChange.storageHeaderMap.values());
     getNameTables();
     ui->addTableWidget->setAlternatingRowColors(true);
@@ -40,6 +42,14 @@ void ChangeDataWindow::getNameTables()
         ui->listNameTable->setCurrentIndex(0);
         ui->listNameTablesDelCrt->setCurrentIndex(0);
     }
+}
+
+void ChangeDataWindow::setValueInSelectBox()
+{
+    ui->selectBoxParser->addItem(",");
+    ui->selectBoxParser->addItem(";");
+    ui->selectBoxParser->addItem(",;");
+    ui->selectBoxParser->setCurrentIndex(2);
 }
 
 //Добавление строк в таблицу добавления данных для записи
@@ -149,7 +159,8 @@ void ChangeDataWindow::on_clearTblBtn_clicked()
 void ChangeDataWindow::on_LoadFileBtn_clicked()
 {    
     Myiostreamfile myiostreamfile;
-    QList<QList<QString>> listData = myiostreamfile.loadFile("[,;]"); //"[,;]"
+    QString strParser = "[" + ui->selectBoxParser->currentText() + "]";
+    QList<QList<QString>> listData = myiostreamfile.loadFile(strParser); //"[,;]"
 
 
     if (listData.length() == 0){

@@ -2,4 +2,5 @@
 <p align="left">
   Программа представляет собой простой интерфейс для работы с БД.  
   <img src="https://github.com/DenisSokolov96/GidrometProject/blob/master/img/pngwing.png?raw=true">
+  <img src="https://github.com/DenisSokolov96/GidrometProject/blob/master/img/Map.png?raw=true">
 </p>

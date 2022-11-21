@@ -18,12 +18,12 @@ MainWindow::MainWindow(QWidget *parent)
 
     //Коментарии только для тестирования
     //Запуск окна подключения
-    //SettingDBWindow settingDBWindow;
-    //settingDBWindow.exec();
+    SettingDBWindow settingDBWindow;
+    settingDBWindow.exec();
 
     //createConnection Только для разработки, сразу устанавливаем соединение
-    if (createConnection())
-        storageMain.getNameTableAndCol();
+    //if (createConnection())
+    //    storageMain.getNameTableAndCol();
     // END !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
     //Функция для вывода подсказок
@@ -48,9 +48,19 @@ void MainWindow::on_btn_get_data_triggered()
 void MainWindow::on_btn_del_triggered()
 {
     ui->statusbar->showMessage("Отключение об БД");
-    QMessageBox::StandardButton reply;
-    reply = QMessageBox::question(0, "Внимание", "Вы действительно хотите отключиться от БД?");
-    if (reply == QMessageBox::Yes)
+    QMessageBox msgBox;
+    msgBox.setWindowTitle("Внимание!");
+    msgBox.setText("Вы действительно хотите отключиться от БД?");
+    msgBox.setIcon(QMessageBox::Question);
+
+    QAbstractButton* ButtonDisconnect = new QPushButton("Отключиться от БД");
+    QAbstractButton* ButtonCancel = new QPushButton("Отмена");
+
+    msgBox.addButton(ButtonDisconnect, QMessageBox::NoRole);
+    msgBox.addButton(ButtonCancel, QMessageBox::NoRole);
+
+    msgBox.exec();
+    if (msgBox.clickedButton() == ButtonDisconnect)
         closeConnection();
 }
 

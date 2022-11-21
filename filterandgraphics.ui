@@ -48,9 +48,20 @@
        <widget class="QPushButton" name="saveToCSVBtn">
         <property name="font">
          <font>
-          <weight>75</weight>
-          <bold>true</bold>
+          <pointsize>-1</pointsize>
+          <weight>50</weight>
+          <italic>false</italic>
+          <bold>false</bold>
          </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">border-radius: 5px;
+border-width: 2px;
+border-radius: 10px;
+font: 14px;
+min-width: 10em;
+padding: 3px;
+min-height: 32px;</string>
         </property>
         <property name="text">
          <string>Сохранить в .CSV</string>
@@ -61,12 +72,20 @@
        <widget class="QPushButton" name="getDataBtn">
         <property name="font">
          <font>
-          <weight>75</weight>
-          <bold>true</bold>
+          <pointsize>-1</pointsize>
+          <weight>50</weight>
+          <italic>false</italic>
+          <bold>false</bold>
          </font>
         </property>
         <property name="styleSheet">
-         <string notr="true">background-color: rgb(138, 226, 52)</string>
+         <string notr="true">border-radius: 5px;
+border-width: 2px;
+border-radius: 10px;
+font: 14px;
+min-width: 10em;
+padding: 3px;
+min-height: 32px;</string>
         </property>
         <property name="text">
          <string>Загрузить данные из БД</string>
@@ -77,12 +96,20 @@
        <widget class="QPushButton" name="createGraph">
         <property name="font">
          <font>
-          <weight>75</weight>
-          <bold>true</bold>
+          <pointsize>-1</pointsize>
+          <weight>50</weight>
+          <italic>false</italic>
+          <bold>false</bold>
          </font>
         </property>
         <property name="styleSheet">
-         <string notr="true">color: rgb(46, 52, 54);</string>
+         <string notr="true">border-radius: 5px;
+border-width: 2px;
+border-radius: 10px;
+font: 14px;
+min-width: 10em;
+padding: 3px;
+min-height: 32px;</string>
         </property>
         <property name="text">
          <string>Построить график</string>
@@ -90,15 +117,30 @@
        </widget>
       </item>
       <item row="7" column="0">
-       <widget class="QComboBox" name="nameTables"/>
+       <widget class="QComboBox" name="nameTables">
+        <property name="styleSheet">
+         <string notr="true">min-height: 30px;</string>
+        </property>
+       </widget>
       </item>
       <item row="5" column="0">
        <widget class="QPushButton" name="savePic">
         <property name="font">
          <font>
-          <weight>75</weight>
-          <bold>true</bold>
+          <pointsize>-1</pointsize>
+          <weight>50</weight>
+          <italic>false</italic>
+          <bold>false</bold>
          </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">border-radius: 5px;
+border-width: 2px;
+border-radius: 10px;
+font: 14px;
+min-width: 10em;
+padding: 3px;
+min-height: 32px;</string>
         </property>
         <property name="text">
          <string>Сохранить изображение графика</string>
@@ -115,9 +157,20 @@
        <widget class="QPushButton" name="pushButton">
         <property name="font">
          <font>
-          <weight>75</weight>
-          <bold>true</bold>
+          <pointsize>-1</pointsize>
+          <weight>50</weight>
+          <italic>false</italic>
+          <bold>false</bold>
          </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">border-radius: 5px;
+border-width: 2px;
+border-radius: 10px;
+font: 14px;
+min-width: 10em;
+padding: 3px;
+min-height: 32px;</string>
         </property>
         <property name="text">
          <string>Удалить выделенные элементы</string>

@@ -42,8 +42,8 @@ void FilterAndGraphics::on_createGraph_clicked()
 
        //listParamY.append(ui->tableWidget->item(i, idCol1)->text().toDouble());
     }
-    textTitle = "оX: " + listHeaderOutRUS[idCol2] + " / ";
-    textTitle += "оY: " + listHeaderOutRUS[idCol1];
+    textTitle = "оX: " + listHeaderOutRUS[idCol1] + " / ";
+    textTitle += "оY: " + listHeaderOutRUS[idCol2];
 
     QSplineSeries* series = new QSplineSeries();
     for (int i=0; i<listParamX.length(); i++)

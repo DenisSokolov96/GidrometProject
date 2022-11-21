@@ -141,7 +141,6 @@ bool RequestSql::setDataToDB(QString nameTable, QStringList listHeaders, QList<Q
 
     QSqlQuery query;
     query.prepare(strSQL);
-
     if (!query.exec()){
         QMessageBox::warning(0, "Ошибка записи данных в БД", query.lastError().text());        
         return false;

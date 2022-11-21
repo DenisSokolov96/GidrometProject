@@ -36,10 +36,11 @@ private slots:
 
 private:
     Ui::ChangeDataWindow *ui;
+    void setValueInSelectBox();
     void getNameTables();
     void refreshTable(QStringList lineToken);
     void delSelectedRow();
-    void delStrInDB();
+    void delStrInDB();    
     QString valToKey(QString searhKey);
     QString quotPars(QString strPars);    
 };

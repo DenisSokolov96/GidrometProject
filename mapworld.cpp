@@ -4,11 +4,11 @@
 #include <QGraphicsObject>
 #include <QQuickItem>
 #include <requestSql.h>
-#//include <QQuickWidget>
 #include <QQmlContext>
 #include "MarkerModel.h"
 #include <storage.h>
 #include <QMessageBox>
+#include <QFileDialog>
 
 //получаю ссылку на объект одиночки
 Storage& storageMapWorld = Storage::Instance();
@@ -101,6 +101,8 @@ void MapWorld::myToolTip()
     ui->lineSearch->setToolTipDuration(3000);
     ui->searchBtn->setToolTip("Кнопка для запуска поиска объектов");
     ui->searchBtn->setToolTipDuration(3000);    
+    ui->btnCreateScreen->setToolTip("Сделать скриншот карты и сохранить по указанному пути");
+    ui->btnCreateScreen->setToolTipDuration(3000);
 }
 
 //Собтие на нажатие кнопки поиска
@@ -146,4 +148,22 @@ QStringList MapWorld::requvestInfo()
     if (textInfoGeoObject.length() == 0) textInfoGeoObject.append("Данные по запросу: '" + lineSearch + "' не получены...");
 
     return textInfoGeoObject;
+}
+
+//Сделать скриншот карты и сохранить в указанную папку
+void MapWorld::on_btnCreateScreen_clicked()
+{
+    QString fileName = QFileDialog::getSaveFileName(this,tr("Сохранить"), "",tr("Ссылка на документ (*.png);;All Files (*)"));
+    if (fileName.isEmpty())
+           return;
+    else {
+        try{
+            QPixmap pixMap = QPixmap::grabWidget(ui->Map);
+            fileName.append(".png");
+            pixMap.save(fileName);
+        }catch(...){
+            QMessageBox::warning(this, "Ошибка сохранения", "Файл не сохранен!");
+        }
+    }
+    QMessageBox::information(this, "Успешно!", "Карта сохранена");
 }

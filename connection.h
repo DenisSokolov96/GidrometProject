@@ -34,6 +34,7 @@ inline void closeConnection()
 {
     QSqlDatabase db = QSqlDatabase::addDatabase("QPSQL");
     db.close();
+
     if (!db.open())
         QMessageBox::warning(0, "Отключение", "Отключение выполнено");
     else

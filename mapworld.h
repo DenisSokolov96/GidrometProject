@@ -31,6 +31,7 @@ signals:
 
 private slots:
     void on_searchBtn_clicked();
+    void on_btnCreateScreen_clicked();
 };
 
 #endif // MAPWORLD_H
